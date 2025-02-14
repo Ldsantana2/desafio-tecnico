@@ -1,0 +1,1 @@
+CREATE DATABASE desafio_spring_database;

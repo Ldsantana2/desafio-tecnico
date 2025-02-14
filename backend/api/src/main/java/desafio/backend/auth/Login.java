@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import desafio.backend.users.User;
 import desafio.backend.users.UserFacade;
 
+@CrossOrigin(origins = "http://localhost:3000", exposedHeaders = "Authorization")
 @RestController
 @RequestMapping("/auth")
 public class Login {
@@ -14,24 +15,26 @@ public class Login {
     private UserFacade userFacade;
 
     @Autowired
-    private JwtUtil jwtUtil;  // Use the injected JwtUtil instance
+    private JwtUtil jwtUtil;  
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String senha) {
-
-        // Fetch user from the database using the email
-        User user = userFacade.findByEmail(email);
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        // Buscar usuário no banco pelo e-mail
+        User user = userFacade.findByEmail(loginRequest.getEmail());
 
         if (user == null) {
             return ResponseEntity.status(401).body("User not found");
         }
 
-        // Check if the password matches
-        if (user.getSenha().equals(senha)) {  // Direct comparison (consider hashing passwords in production)
-            String token = jwtUtil.generateToken(email);  // Use the injected JwtUtil instance to generate the token
-            return ResponseEntity.ok().header("Authorization", "Bearer " + token).body("Login successful");
+        // Verificar se a senha está correta
+        if (user.getSenha().equals(loginRequest.getSenha())) {
+            String token = jwtUtil.generateToken(loginRequest.getEmail());
+            return ResponseEntity.ok()
+                    .header("Authorization", "Bearer " + token)
+                    .body("Login successful");
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
-    }
-}
+    } // <- FECHAMENTO DO MÉTODO `login`
+
+} // <- FECHAMENTO DA CLASSE `Login`

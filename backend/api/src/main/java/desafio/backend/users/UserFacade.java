@@ -1,21 +1,20 @@
 package desafio.backend.users;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import desafio.backend.apiexterna.Conectar;
+import desafio.backend.apiexterna.Conectar;  // Correct import
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserFacade {
+
     @Autowired
     private UserRepository repository;
 
     @Autowired
-    private Conectar conectar;
+    private Conectar conectar;  // Correct injection
 
     public UserDTO criar(UserDTO userDTO) {
         User user = new User();
@@ -25,15 +24,15 @@ public class UserFacade {
         repository.save(user);  // Save first to generate ID
     
         // Fetch additional user data using the newly created user ID
-        UserDTO externalUserData = conectar.fetchUserData(user.getId());
+        UserDTO externalUserData = conectar.fetchUserData(user.getId());  // Correct usage
     
-            user.setNome(externalUserData.getNome());
-            user.setTelefone(externalUserData.getTelefone());
-            user.setWebsite(externalUserData.getWebsite());
-            user.setEndereco(externalUserData.getEndereco());
-            user.setEmpresa(externalUserData.getEmpresa());
+        user.setNome(externalUserData.getNome());
+        user.setTelefone(externalUserData.getTelefone());
+        user.setWebsite(externalUserData.getWebsite());
+        user.setEndereco(externalUserData.getEndereco());
+        user.setEmpresa(externalUserData.getEmpresa());
     
-            repository.save(user);  
+        repository.save(user);  
     
         // Fetch the updated user from the database
         User updatedUser = repository.findById(user.getId()).orElse(null);
@@ -83,5 +82,10 @@ public class UserFacade {
     public String delete(Long userId) {
         repository.deleteById(userId);
         return "DELETED";
+    }
+
+    // Added method to find user by email
+    public User findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 }

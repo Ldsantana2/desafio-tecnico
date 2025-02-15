@@ -41,11 +41,7 @@ const UsersList = () => {
             {/* Exibindo o erro, se houver */}
             <ul>
                 {users.length > 0 ? (
-                    users.map((user) => (
-                        <li key={user.id}>
-                            {user.name} - {user.email}
-                        </li>
-                    ))
+                    users.map((user) => <li key={user.id}>{user.email}</li>)
                 ) : (
                     <p>Nenhum usuário encontrado.</p>
                 )}

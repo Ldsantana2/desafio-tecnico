@@ -12,7 +12,7 @@ O frontend é uma aplicação Next.js configurada com Tailwind CSS, React 19 e T
 
 ### Database
 
-A database virá povoada com 1 usuário de teste. O commando usado para criar a tabela pode ser visto no arquivo criar_tablea.sql, localizado dentro da pasta backend/database.
+A database virá povoada com 1 usuário de teste. O commando usado para criar a tabela pode ser visto no arquivo criar_tabela.sql, localizado dentro da pasta backend/database.
 
 ## Configuração do Docker
 
@@ -25,6 +25,7 @@ Dentro da pasta `backend/database`, há um arquivo `docker-compose.yaml`. Para s
 Navegue via terminal até a pasta desafio-tecnico/backend/api e execute os commandos:
 
 `mvn clean install`
+
 `mvn spring-boot:run`
 
 ## Como Rodar a Aplicação Frontend:
@@ -32,6 +33,7 @@ Navegue via terminal até a pasta desafio-tecnico/backend/api e execute os comma
 Navegue via terminal até a pasta desafio-tecnico/frontend/interface e execute os comandos:
 
 `npm install`
+
 `npm run dev`
 
 ## URLs

@@ -4,7 +4,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import io.github.cdimascio.dotenv.Dotenv;  
 import java.security.Key;
 import java.util.Date;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,7 @@ public class JwtUtil {
     private static final Key SIGNING_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);  // 256-bit key
     private static final long EXPIRATION_TIME = 86400000; // 1 day in milliseconds
 
-    public static String generateToken(String email) {
+    public String generateToken(String email) {
         return Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date())
@@ -34,7 +33,7 @@ public class JwtUtil {
         }
     }
 
-    public static String extractEmail(String token) {
+    public String extractEmail(String token) {
         return getClaims(token).getSubject();
     }
 

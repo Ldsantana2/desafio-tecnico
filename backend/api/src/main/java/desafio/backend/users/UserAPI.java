@@ -23,10 +23,7 @@ public class UserAPI {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<?> criar(@RequestBody UserDTO userDTO, HttpServletRequest request) {
-        if (!isTokenValid(request)) {
-            return ResponseEntity.status(401).body("Unauthorized: Invalid or missing token");
-        }
+    public ResponseEntity<?> criar(@RequestBody UserDTO userDTO) {
         return ResponseEntity.ok(userFacade.criar(userDTO));
     }
 
@@ -70,4 +67,31 @@ public class UserAPI {
         }
         return null;
     }
+
+@GetMapping("/me")
+@ResponseBody
+public ResponseEntity<?> getUserInfo(HttpServletRequest request) {
+    String token = extractToken(request);
+    if (token == null || !jwtUtil.validateToken(token)) {
+        return ResponseEntity.status(401).body("Unauthorized: Invalid or missing token");
+    }
+
+    String userEmail = jwtUtil.extractEmail(token);
+    User user = userFacade.findByEmail(userEmail);
+
+    if (user == null) {
+        return ResponseEntity.status(404).body("User not found");
+    }
+
+    // Criar um objeto de resposta sem email e senha
+    UserDTO userDTO = new UserDTO();
+    userDTO.setId(user.getId());
+    userDTO.setNome(user.getNome());
+    userDTO.setTelefone(user.getTelefone());
+    userDTO.setWebsite(user.getWebsite());
+    userDTO.setEndereco(user.getEndereco());
+    userDTO.setEmpresa(user.getEmpresa());
+
+    return ResponseEntity.ok(userDTO);
+}
 }

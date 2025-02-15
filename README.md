@@ -1,41 +1,5 @@
 # Desafio Técnico
 
-Repositório para Desafio Técnico.
-
-Este repositório contém os seguintes componentes:
-
-### Backend
-
-O backend está configurado com Spring Boot e pode ser executado com Maven.
-
-### Frontend
-
-O frontend é uma aplicação Next.js configurada com Tailwind CSS, React 19 e TypeScript.
-
-## Configuração do Docker
-
-Dentro da pasta `backend/database`, há um arquivo `docker-compose.yaml`. Para subir o Docker, execute o seguinte comando:
-
-`docker-compose up -d`
-
-# Desafio Técnico
-
-Repositório para Desafio Técnico.
-
-Este repositório contém os seguintes componentes:
-
-### Backend
-
-O backend está configurado com Spring Boot e pode ser executado com Maven.
-
-### Frontend
-
-O frontend é uma aplicação Next.js configurada com Tailwind CSS, React 19 e TypeScript.
-
----
-
-# Desafio Técnico
-
 Este repositório contém os seguintes componentes:
 
 ### Backend

@@ -12,7 +12,7 @@ public class Endereco {
     private String city;
     private String zipcode;
 
-    // Getters and Setters
+    
     public String getStreet() {
         return street;
     }

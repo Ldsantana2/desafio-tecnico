@@ -11,7 +11,7 @@ export default function UsersPage() {
     useEffect(() => {
         const token = Cookies.get('token')
         if (!token) {
-            router.push('/login') // Redireciona para o login se não houver token
+            router.push('/login')
             return
         }
 
@@ -30,13 +30,13 @@ export default function UsersPage() {
     }, [router])
 
     const handleGoToProfile = () => {
-        router.push('/profile') // Redireciona para o perfil do usuário logado
+        router.push('/profile')
     }
 
     const handleLogout = () => {
         Cookies.remove('token')
         Cookies.remove('user')
-        router.push('/login') // Redireciona para a página de login
+        router.push('/login')
     }
 
     return (

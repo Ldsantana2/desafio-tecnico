@@ -3,7 +3,6 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import api from '../api/api'
 
-// Tipando o contexto para o TypeScript
 interface AuthContextType {
     user: { email: string | null }
     setUser: React.Dispatch<React.SetStateAction<{ email: string | null }>>
@@ -18,7 +17,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const router = useRouter()
 
     useEffect(() => {
-        // Verificando se o usuário já está autenticado ao carregar a página
         const token = Cookies.get('token')
         const savedUserEmail = Cookies.get('user')
 
@@ -30,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const login = async (email: string, senha: string): Promise<boolean> => {
         try {
             const response = await api.post('/auth/login', { email, senha })
-            // Pegando o token do header
+
             const authHeader = response.headers['authorization']
 
             if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -38,14 +36,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 return false
             }
 
-            const token = authHeader.split(' ')[1] // Extraindo o token corretamente
+            const token = authHeader.split(' ')[1]
 
-            // Salvando o token e o email do usuário nos cookies
-            Cookies.set('token', token, { expires: 1 }) // Expira em 1 dia
+            Cookies.set('token', token, { expires: 1 })
             Cookies.set('user', email, { expires: 1 })
             setUser({ email })
 
-            // Redirecionando para a página de perfil após o login
             router.push('/profile')
             return true
         } catch (error) {
@@ -58,7 +54,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         Cookies.remove('token')
         Cookies.remove('user')
         setUser({ email: null })
-        router.push('/login') // Redireciona para a página de login após logout
+        router.push('/login')
     }
 
     return (

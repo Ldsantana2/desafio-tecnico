@@ -4,28 +4,28 @@ import Cookies from 'js-cookie'
 import api from '../api/api'
 
 const UsersList = () => {
-    const [users, setUsers] = useState<any[]>([]) // Para armazenar a lista de usuários
-    const [error, setError] = useState<string | null>(null) // Para armazenar erros, se houver
+    const [users, setUsers] = useState<any[]>([])
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const token = Cookies.get('token') // Pegando o token dos cookies
+            const token = Cookies.get('token')
             if (!token) {
                 console.error('Token não encontrado!')
                 setError('Token não encontrado!')
                 return
             }
 
-            console.log('Token:', token) // Adicionando log para verificação
+            console.log('Token:', token)
 
             try {
                 const response = await api.get('/users', {
                     headers: {
-                        Authorization: `Bearer ${token}`, // Enviando o token no header
+                        Authorization: `Bearer ${token}`,
                     },
                 })
-                console.log('Usuários:', response.data) // Verificando a resposta da API
-                setUsers(response.data) // Atualizando a lista de usuários
+                console.log('Usuários:', response.data)
+                setUsers(response.data)
             } catch (error) {
                 console.error('Erro ao buscar usuários:', error)
                 setError('Erro ao buscar usuários.')

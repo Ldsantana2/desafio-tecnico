@@ -12,7 +12,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)  // Added senha field
+    @Column(nullable = false)  
     private String senha;
 
     private String nome;
@@ -32,8 +32,8 @@ public class User {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getSenha() { return senha; }  // Getter for senha
-    public void setSenha(String senha) { this.senha = senha; }  // Setter for senha
+    public String getSenha() { return senha; }  
+    public void setSenha(String senha) { this.senha = senha; } 
 
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }

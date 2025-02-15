@@ -12,7 +12,7 @@ export default function ProfilePage() {
     useEffect(() => {
         const token = Cookies.get('token')
         if (!token) {
-            router.push('/login') // Redireciona para o login se não houver token
+            router.push('/login')
             return
         }
 
@@ -33,7 +33,7 @@ export default function ProfilePage() {
     const handleLogout = () => {
         Cookies.remove('token')
         Cookies.remove('user')
-        router.push('/login') // Redireciona para a página de login
+        router.push('/login')
     }
 
     if (error) return <p>{error}</p>
@@ -43,7 +43,7 @@ export default function ProfilePage() {
             <h1 className="text-3xl font-bold mb-4">Perfil do Usuário</h1>
             {user ? (
                 <div className="space-y-3">
-                    {/* Removido a exibição do email */}
+                    {}
                     <p>
                         <strong>Nome:</strong> {user.name || 'Não disponível'}
                     </p>
@@ -55,7 +55,7 @@ export default function ProfilePage() {
                         <strong>Website:</strong>{' '}
                         {user.website || 'Não disponível'}
                     </p>
-                    {/* Exibindo o endereço corretamente, caso exista */}
+                    {}
                     <p>
                         <strong>Endereço:</strong>
                         {user.address
@@ -64,7 +64,7 @@ export default function ProfilePage() {
                               }`
                             : 'Não disponível'}
                     </p>
-                    {/* Exibindo a empresa corretamente, caso exista */}
+                    {}
                     <p>
                         <strong>Empresa:</strong>
                         {user.company ? user.company.name : 'Não disponível'}

@@ -8,9 +8,9 @@ public class Empresa {
     @Column(name = "company_name")
     private String name;
     private String catchPhrase;
-    private String bs; // This was likely missing
+    private String bs; 
 
-    // Getters and Setters
+    
     public String getName() {
         return name;
     }

@@ -19,7 +19,6 @@ public UserDTO fetchUserData(Long userId) {
 
     try {
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-        // Manually parse JSON
         ObjectMapper objectMapper = new ObjectMapper();
         UserDTO userDTO = objectMapper.readValue(response.getBody(), UserDTO.class);
 

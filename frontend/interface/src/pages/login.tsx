@@ -20,7 +20,7 @@ export default function LoginPage() {
 
             if (token) {
                 Cookies.set('token', token.split(' ')[1], { expires: 1 })
-                router.push('/profile') // Redireciona para a página de perfil
+                router.push('/profile')
             } else {
                 setError('Erro ao autenticar. Verifique suas credenciais.')
             }

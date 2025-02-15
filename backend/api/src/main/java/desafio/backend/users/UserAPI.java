@@ -27,16 +27,24 @@ public class UserAPI {
         return ResponseEntity.ok(userFacade.criar(userDTO));
     }
 
-    @PutMapping("/{userId}")
-    @ResponseBody
-    public ResponseEntity<?> atualizar(@PathVariable("userId") Long userId,
-                                       @RequestBody UserDTO userDTO, HttpServletRequest request) {
-        if (!isTokenValid(request)) {
-            return ResponseEntity.status(401).body("Unauthorized: Invalid or missing token");
-        }
-        return ResponseEntity.ok(userFacade.atualizar(userDTO, userId));
+@PutMapping("/{userId}")
+@ResponseBody
+public ResponseEntity<?> atualizar(@PathVariable("userId") Long userId,
+                                   @RequestBody UserDTO userDTO, HttpServletRequest request) {
+    if (!isTokenValid(request)) {
+        return ResponseEntity.status(401).body("Unauthorized: Invalid or missing token");
     }
 
+    UserDTO updatedUserDTO = userFacade.atualizar(userDTO, userId);
+
+    if (updatedUserDTO != null) {
+        return ResponseEntity.ok("Usuário Atualizado!");
+    } else {
+        return ResponseEntity.status(400).body("Nenhuma alteração realizada.");
+    }
+}
+
+    
     @GetMapping
     @ResponseBody
     public ResponseEntity<?> getAll(HttpServletRequest request) {
@@ -83,7 +91,6 @@ public ResponseEntity<?> getUserInfo(HttpServletRequest request) {
         return ResponseEntity.status(404).body("User not found");
     }
 
-    // Criar um objeto de resposta sem email e senha
     UserDTO userDTO = new UserDTO();
     userDTO.setId(user.getId());
     userDTO.setNome(user.getNome());

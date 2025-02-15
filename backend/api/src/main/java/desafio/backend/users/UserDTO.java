@@ -12,7 +12,7 @@ public class UserDTO {
     @JsonProperty("name")
     private String nome;
 
-    @JsonProperty("phone")  // Ensures "phone" from API maps to "telefone"
+    @JsonProperty("phone")  
     private String telefone;
 
     private String website;
@@ -24,7 +24,7 @@ public class UserDTO {
     private Empresa empresa;
 
     public UserDTO() {
-        // Default constructor required for instantiation
+        
     }
 
     public UserDTO(User user) {

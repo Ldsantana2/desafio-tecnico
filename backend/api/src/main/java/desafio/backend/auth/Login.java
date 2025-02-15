@@ -19,14 +19,14 @@ public class Login {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        // Buscar usuário no banco pelo e-mail
+       
         User user = userFacade.findByEmail(loginRequest.getEmail());
 
         if (user == null) {
             return ResponseEntity.status(401).body("User not found");
         }
 
-        // Verificar se a senha está correta
+        
         if (user.getSenha().equals(loginRequest.getSenha())) {
             String token = jwtUtil.generateToken(loginRequest.getEmail());
             return ResponseEntity.ok()
@@ -35,6 +35,6 @@ public class Login {
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
-    } // <- FECHAMENTO DO MÉTODO `login`
+    } 
 
-} // <- FECHAMENTO DA CLASSE `Login`
+} 

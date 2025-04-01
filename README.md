@@ -1,5 +1,7 @@
 # Desafio Técnico
 
+Criar uma aplicação Fullstack utilizando ReactJS (Next.js) no frontend e Spring Boot (Java 17) no backend. O sistema deverá permitir o cadastro de usuários e consultar informações adicionais a partir de uma API externa.
+
 Este repositório contém os seguintes componentes:
 
 ### Backend
